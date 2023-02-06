@@ -5,12 +5,16 @@ pipeline {
     stages {
         stage('pre -build') {
             steps {
-                bat 'echo Pre-build'
+                sh """
+                echo 'Pre-build'
+                """
             }
         }
         stage('Unit tests') {
             steps {
-                bat 'echo Build in progress.'
+                sh """
+                echo 'Build in progress.'
+                """
             }
         }
         stage('Package and Publish') {
@@ -21,7 +25,9 @@ pipeline {
 
             }
             steps {
-                bat 'echo Running unit tests'
+                sh """
+                echo 'Running unit tests'
+                """
             }
         }
         stage('Regression tests') {
@@ -31,7 +37,9 @@ pipeline {
                 }
             }
             steps {
-                bat 'echo Deploying build'
+                sh """
+                echo 'Deploying build'
+                """
             }
         }
         stage('Release to pre-prod') {
@@ -41,7 +49,9 @@ pipeline {
                 }
             }
             steps {
-                bat 'echo Running E2E tests'
+                sh """
+                echo 'Running E2E tests'
+                """
             }
         }
         stage('Release to prod') {
@@ -51,7 +61,9 @@ pipeline {
                 }
             }
             steps {
-                bat 'echo Releasing to prod'
+                sh """
+                echo 'Releasing to prod'
+                """
             }
         }
     }
