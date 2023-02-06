@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'python:3.9.16-slim' }
+    }
     stages {
         stage('pre -build') {
             steps {
