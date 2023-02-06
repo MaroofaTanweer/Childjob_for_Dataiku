@@ -15,7 +15,10 @@ pipeline {
         }
         stage('Package and Publish') {
             when {
-                ENV_NAME 'SIT'
+                expression { 
+                   return params.ENV_NAME == 'SIT'
+                }
+
             }
             steps {
                 bat 'echo Running unit tests'
@@ -23,7 +26,9 @@ pipeline {
         }
         stage('Regression tests') {
             when {
-                ENV_NAME 'SIT'
+                expression { 
+                   return params.ENV_NAME == 'SIT'
+                }
             }
             steps {
                 bat 'echo Deploying build'
@@ -31,7 +36,9 @@ pipeline {
         }
         stage('Release to pre-prod') {
             when {
-                ENV_NAME 'SIT'
+                expression { 
+                   return params.ENV_NAME == 'SIT'
+                }
             }
             steps {
                 bat 'echo Running E2E tests'
@@ -39,7 +46,9 @@ pipeline {
         }
         stage('Release to prod') {
             when {
-                ENV_NAME 'PROD'
+                 expression { 
+                   return params.ENV_NAME == 'PROD'
+                }
             }
             steps {
                 bat 'echo Releasing to prod'
