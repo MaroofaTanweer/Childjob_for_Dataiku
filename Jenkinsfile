@@ -20,7 +20,7 @@ pipeline {
         stage('Package and Publish') {
             when {
                 expression { 
-                   return params.ENV_NAME == 'SIT'
+                   return (params.ENV_NAME == 'SIT' || params.ENV_NAME == 'PROD')
                 }
 
             }
@@ -33,7 +33,7 @@ pipeline {
         stage('Regression tests') {
             when {
                 expression { 
-                   return params.ENV_NAME == 'SIT'
+                   return (params.ENV_NAME == 'SIT' || params.ENV_NAME == 'PROD')
                 }
             }
             steps {
@@ -57,7 +57,7 @@ pipeline {
         stage('Release to prod') {
             when {
                  expression { 
-                   return params.ENV_NAME == 'PROD'
+                   return (params.ENV_NAME == 'SIT' || params.ENV_NAME == 'PROD')
                 }
             }
             steps {
